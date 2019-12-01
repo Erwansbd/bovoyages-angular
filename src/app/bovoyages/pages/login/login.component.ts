@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {ClientService} from '../../services/client.service';
 import {NgForm} from '@angular/forms';
@@ -13,13 +13,16 @@ export class LoginComponent implements OnInit {
   isAuth: boolean;
   error: string;
 
-  constructor(private authService: AuthService, private clientService: ClientService) { }
+  constructor(private authService: AuthService, private clientService: ClientService) {
+  }
 
   ngOnInit() {
   }
 
   login(f: NgForm) {
-    this.authService.login(f.value);
+    this.authService.login(f.value,
+      (error) => this.error = error
+    );
     this.isAuth = this.authService.isLoggedIn();
   }
 

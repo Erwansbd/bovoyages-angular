@@ -7,21 +7,39 @@
     <div class="col-md-6 bg-light">
       <div class="login d-flex align-items-center py-5">
 
-        <!-- Demo content-->
+        <!-- Login content-->
         <div class="container">
           <div class="row">
             <div class="col-lg-10 col-xl-7 mx-auto">
               <h3 class="display-4">Login</h3>
               <p class="text-muted mb-4">Merci de vous connecter !</p>
-              <form>
+              <form #f="ngForm" (ngSubmit)="login(f)">
                 <div class="form-group mb-3">
-                  <input id="inputEmail" type="text" placeholder="Username" required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+                  <input type="text" name="nom" placeholder="Username" #nom="ngModel"
+                         class="form-control rounded-pill border-0 shadow-sm px-4" ngModel required minlength="3">
+                  <div *ngIf="nom.invalid && (nom.touched || nom.dirty)">
+                    <p *ngIf="nom.errors.required" class="font-weight-bold text-center">
+                      Merci de renseigner votre nom d'utilisateur.
+                    </p>
+                    <p *ngIf="nom.errors.minlength" class="font-weight-bold text-center">
+                      Votre nom doit contenir plus de trois caracteres.
+                    </p>
+                  </div>
                 </div>
                 <div class="form-group mb-3">
-                  <input id="inputPassword" type="password" placeholder="Password" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                  <input type="text" placeholder="Password" name="password"
+                         class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" required ngModel>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">Sign in</button>
-                <div class="text-center d-flex justify-content-between mt-4"><p>Pas de compte? c'est par ici. <a [routerLink]='["/register"]' class="font-italic text-muted">
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">
+                    Sign in
+                  </button>
+                </div>
+                <p *ngIf="error">
+                  {{error}}
+                </p>
+                <div class="text-center d-flex justify-content-between mt-4"><p>Pas de compte? c'est par ici. <a
+                  [routerLink]='["/register"]' class="font-italic text-muted">
                   <u>Register</u></a></p></div>
               </form>
             </div>
