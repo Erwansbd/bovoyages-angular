@@ -28,7 +28,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Version 1.0.0
 
-Affichage de la liste des destinations
-Affichage des details da la destination selectionnée (Dates disponibles, prixHT, nombre de places restantes)
-Module de connexion
-Module d'inscription
+Affichage de la liste des destinations.\
+Affichage des details da la destination selectionnée (Dates disponibles, prixHT, nombre de places restantes)\
+Module de connexion\
+Module d'inscription\
