@@ -1,0 +1,8 @@
+<app-navbar></app-navbar>
+<div>{{destination.region}}</div>
+<div>
+  {{datesVoyage}}
+</div>
+<div *ngFor=" let datesVoyage of datesVoyage">
+  <app-dates-voyage [datesVoyage]="datesVoyage"></app-dates-voyage>
+</div>
