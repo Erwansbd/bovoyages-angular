@@ -13,7 +13,6 @@ export class DestinationListeComponent implements OnInit {
   destinations: Destination[];
   destination: Destination;
   selectedDestination: Destination;
-  datesVoyageList: DatesVoyage[];
 
 
   constructor(private destinationService: DestinationsService) { }
@@ -22,11 +21,6 @@ export class DestinationListeComponent implements OnInit {
     this.destinationService.getDestinations().subscribe(
       (destinations) => {
         this.destinations = destinations;
-      }
-    );
-    this.destinationService.getDatesVoyages().subscribe(
-      (datesVoyageList) => {
-        this.datesVoyageList = datesVoyageList;
       }
     );
   }

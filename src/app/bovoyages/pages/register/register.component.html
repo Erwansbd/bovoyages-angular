@@ -1,1 +1,47 @@
-<p>register works!</p>
+<div class="container-fluid">
+  <div class="row no-gutter">
+    <!-- The image half -->
+    <div class="col-md-6 d-none d-md-flex"></div>
+    <!-- Login content-->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 col-xl-7 mx-auto">
+          <h3 class="display-4">Login</h3>
+          <p class="text-muted mb-4">Merci de vous connecter !</p>
+          <form #f="ngForm" (ngSubmit)="register(f)">
+            <div class="form-group mb-3">
+              <input type="text" name="nom" placeholder="Username" #nom="ngModel"
+                     class="form-control rounded-pill border-0 shadow-sm px-4" ngModel required minlength="3">
+              <div *ngIf="nom.invalid && (nom.touched || nom.dirty)">
+                <p *ngIf="nom.errors.required" class="font-weight-bold text-center">
+                  Merci de renseigner votre nom d'utilisateur.
+                </p>
+                <p *ngIf="nom.errors.minlength" class="font-weight-bold text-center">
+                  Votre nom doit contenir plus de trois caracteres.
+                </p>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <input type="text" placeholder="Password" name="password"
+                     class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" required ngModel>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">
+                Sign in
+              </button>
+            </div>
+            <div class="text-center d-flex justify-content-between mt-4"><p>Pas de compte? c'est par ici. <a
+              [routerLink]='["/register"]' class="font-italic text-muted">
+              <u>Register</u></a></p></div>
+          </form>
+        </div>
+      </div>
+    </div><!-- End -->
+    <!-- The content half -->
+    <div class="col-md-6 d-none d-md-flex bg-image">
+
+    </div><!-- End -->
+
+  </div>
+</div>
+

@@ -9,6 +9,7 @@ import {ClientService} from './client.service';
 export class AuthService {
 
   private isAuth = false;
+  private url = 'http://localhost:7071/';
 
   constructor(private router: Router, private httpClient: HttpClient, private clientService: ClientService) {
   }
@@ -23,7 +24,7 @@ export class AuthService {
     const params = new HttpParams()
     .set('nom', client.nom)
     .set('password', client.password);
-    this.httpClient.post('connexion', params).subscribe(
+    this.httpClient.post(this.url + 'connexion', params).subscribe(
       (status) => {
         if (status) {
           this.isAuth = true;
@@ -44,5 +45,19 @@ export class AuthService {
     this.router.navigateByUrl('/RefreshComponent', {skipLocationChange: true});
     this.router.navigate(['/home']);
 
+  }
+
+  register(client) {
+    const params = new HttpParams()
+      .set('nom', client.nom)
+      .set('password', client.password);
+    this.httpClient.post(this.url + 'signup', params).subscribe(
+      (status) => {
+        if (status) {
+          this.router.navigate(['/login']);
+        } else {
+        }
+      },
+    );
   }
 }

@@ -5,6 +5,8 @@ import {CommonModule} from '@angular/common';
 import {DestinationDetailsComponent} from './bovoyages/components/destination-details/destination-details.component';
 import {LoginComponent} from './bovoyages/pages/login/login.component';
 import {HomeComponent} from './bovoyages/pages/home/home.component';
+import {VoyageComponent} from './bovoyages/pages/voyage/voyage.component';
+import {RegisterComponent} from './bovoyages/pages/register/register.component';
 
 
 const routes: Routes = [
@@ -13,13 +15,19 @@ const routes: Routes = [
     path: 'home', component: HomeComponent
   },
   {
-    path: 'destination', component: DestinationListeComponent, runGuardsAndResolvers: 'always'
+    path: 'destination', component: DestinationListeComponent
   },
   {
     path: 'destination-details/:id', component: DestinationDetailsComponent
   },
   {
+    path: 'voyage/:id', component: VoyageComponent
+  },
+  {
     path: 'login', component: LoginComponent
+  },
+  {
+    path: 'register', component: RegisterComponent
   },
   {
     path: '**', redirectTo: 'destination'

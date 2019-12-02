@@ -1,6 +1,16 @@
-<div>
-  {{datesVoyage.dateAller}}
-  {{datesVoyage.dateRetour}}
-  {{datesVoyage.prixHT}}
-  {{datesVoyage.nbrePlaces}}
+<div class="container">
+  <div class="py-5">
+    <div class="hover hover-4 text-white rounded"><img
+      src="https://i.imgur.com/zCga6FE.jpg" alt="">
+      <div class="hover-overlay"></div>
+      <div class="hover-4-content">
+        <h3 class="hover-4-title text-uppercase font-weight-bold mb-0"><span
+          class="font-weight-light">Plus que </span>{{datesVoyage.nbrePlaces}} place(s) !</h3>
+        <p class="hover-4-description text-uppercase mb-0 small">Destination A/R avec une date aller
+          le {{datesVoyage.dateAller | date: 'EEEE dd LLLL yyy'}} et une date de
+          retour prévue le {{datesVoyage.dateRetour | date: 'EEEE dd LLLL yyy'}}.</p>
+        <h4 class="hover-4-caption font-weight-light">Au prix de {{datesVoyage.prixHT}} €</h4>
+      </div>
+    </div>
+  </div>
 </div>

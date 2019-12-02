@@ -1,8 +1,11 @@
 <app-navbar></app-navbar>
-<div>{{destination.region}}</div>
-<div>
-  {{datesVoyage}}
+<div class="font-italic text-center h4">
+  {{destination.region}}
 </div>
-<div *ngFor=" let datesVoyage of datesVoyage">
-  <app-dates-voyage [datesVoyage]="datesVoyage"></app-dates-voyage>
+<div class="row">
+  <div *ngFor=" let datesVoyage of datesVoyage" class="col-lg-4">
+    <a [routerLink]="['/voyage', datesVoyage.id]">
+      <app-dates-voyage [datesVoyage]="datesVoyage"></app-dates-voyage>
+    </a>
+  </div>
 </div>

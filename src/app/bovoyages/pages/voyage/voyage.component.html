@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <input type="text" value="{{destination?.region}}" formControlName="region" readonly>
+  <textarea formControlName="descriptif" readonly>
+    {{destination?.description}}
+  </textarea>
+  <div formArrayName="client">
+    <div *ngFor="let control of client.controls; index as i">
+      <div [formGroupName]="i">
+        <input type="text" readonly value="{{user.nom}}" formControlName="nom">
+      </div>
+    </div>
+  </div>
+  <div formArrayName="voyageurs">
+    <div *ngFor="let control of voyageurs.controls; index as i">
+      <div [formGroupName]="i">
+        <select name="civilite" formControlName="civilite">
+          <option>M</option>
+          <option>Mme</option>
+          <option>Mlle</option>
+        </select>
+        <input type="text" formControlName="nom">
+        <input type="text" formControlName="prenom">
+      </div>
+    </div>
+  </div>
+  <button type="button" (click)="addVoyageur()">Ajouter un voyageur</button>
+  <button type="submit">Créer le voyage</button>
+</form>
+<div>
+  {{destination.region}}
+  {{datesVoyage?.id}}
+</div>
