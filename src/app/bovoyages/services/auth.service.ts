@@ -21,14 +21,15 @@ export class AuthService {
   login(client, cb) {
     console.log(client.nom, client.password);
     const params = new HttpParams()
-      .set('nom', client.nom)
-      .set('password', client.password);
-    this.httpClient.post('connexion?', params.toString()).subscribe(
+    .set('nom', client.nom)
+    .set('password', client.password);
+    this.httpClient.post('connexion', params).subscribe(
       (status) => {
         if (status) {
           this.isAuth = true;
           this.router.navigate(['/destination']);
           this.clientService.setClient(client);
+          localStorage.setItem('auth', 'true');
         } else {
           cb('Identifiants incorrects');
         }
