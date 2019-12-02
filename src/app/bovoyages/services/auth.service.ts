@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {ClientService} from './client.service';
 
 @Injectable({
@@ -20,7 +20,10 @@ export class AuthService {
 
   login(client, cb) {
     console.log(client.nom, client.password);
-    this.httpClient.post('connexion', client).subscribe(
+    const params = new HttpParams()
+      .set('nom', client.nom)
+      .set('password', client.password);
+    this.httpClient.post('connexion?', params.toString()).subscribe(
       (status) => {
         if (status) {
           this.isAuth = true;
