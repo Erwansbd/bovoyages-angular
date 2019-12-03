@@ -16,7 +16,7 @@ import {error} from 'util';
 })
 export class VoyageComponent implements OnInit {
   private url = 'http://localhost:7071/';
-  @Input() user: Client;
+  userDisplay = '';
   @Input() destination: Destination;
   @Input() datesVoyage: DatesVoyage;
   form: FormGroup;
@@ -25,9 +25,7 @@ export class VoyageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.clientService.getClient().subscribe(
-      client => this.user = client
-    );
+    this.userDisplay = localStorage.getItem('username');
     this.form = new FormGroup({
       region: new FormControl(''),
       descriptif: new FormControl('', [Validators.required]),
