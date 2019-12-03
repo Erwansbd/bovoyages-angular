@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
 
-  client: Client;
+  userDisplay = '';
   title = 'BoVoyages';
   isAuth = false;
   date: Date;
@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.date = new Date();
+    this.userDisplay = localStorage.getItem('username');
     this.loginStatus$ = this.authService.currentLoginStatus;
     this.username$ = this.authService.currentUsername;
   }
