@@ -7,6 +7,8 @@ export class Destination {
   description?: string;
   deleted?: boolean;
   datesVoyage?: Array<DatesVoyage>;
+  imageUrl?: string;
+  fkDestination?: number;
 
 
   constructor(args: Destination = {}) {
@@ -15,5 +17,7 @@ export class Destination {
     this.description = args.description;
     this.deleted = args.deleted;
     this.datesVoyage = args.datesVoyage;
+    this.imageUrl = args.imageUrl;
+    this.fkDestination = args.fkDestination;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DestinationsService} from '../../shared/destinations.service';
 import {Destination} from '../../shared/destination';
 import {DatesVoyage} from '../../shared/dates-voyage';
@@ -11,7 +11,7 @@ import {DatesVoyage} from '../../shared/dates-voyage';
 export class DestinationListeComponent implements OnInit {
 
   destinations: Destination[];
-  destination: Destination;
+  @Input() destination: Destination;
   selectedDestination: Destination;
 
 
@@ -21,8 +21,17 @@ export class DestinationListeComponent implements OnInit {
     this.destinationService.getDestinations().subscribe(
       (destinations) => {
         this.destinations = destinations;
-      }
-    );
+        this.destinations.forEach(
+          destination => {
+            console.log(destination.id)
+            this.destinationService.getImages(destination.id).subscribe(
+              (images) => {
+                images.forEach(
+                  img => destination.imageUrl = images[0].image);
+              });
+          }
+        );
+      });
   }
 
   selectDestination(destination) {

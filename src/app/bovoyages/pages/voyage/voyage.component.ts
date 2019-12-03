@@ -57,7 +57,7 @@ export class VoyageComponent implements OnInit {
         this.destinationService.getDatesVoyageById(id).subscribe(
           datesVoyage => this.datesVoyage = datesVoyage
         );
-        console.log(this.client);
+        console.log(this.datesVoyage);
       }
     );
   }

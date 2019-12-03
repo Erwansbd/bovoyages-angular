@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Destination} from './destination';
 import {DatesVoyage} from './dates-voyage';
+import {Image} from './image';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,9 @@ export class DestinationsService {
 
   submitVoyage(data): Observable<any> {
     return this.httpClient.post(this.url + 'voyage/new', data);
+  }
+
+  getImages(id: number): Observable<any> {
+    return this.httpClient.get<Image[]>(this.url + 'destinationimage/' + id);
   }
 }
