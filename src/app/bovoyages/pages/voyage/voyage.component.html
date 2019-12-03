@@ -1,35 +1,51 @@
 <app-navbar></app-navbar>
+
+<div class="container text-center">
+  Merci d'ajouter les voyageurs participants au voyage.
+</div>
 <form (ngSubmit)="onSubmit()" [formGroup]="form">
-  <input type="text" [(ngModel)]="destination.region" formControlName="region" readonly>
-  <textarea [(ngModel)]="destination.description" formControlName="descriptif" readonly>
+
+  <input class="" type="text" [(ngModel)]="destination.region" formControlName="region" hidden>
+  <textarea [(ngModel)]="destination.description" formControlName="descriptif" hidden>
   </textarea>
   <div formGroupName="datesVoyage">
-    <input type="text" [(ngModel)]="datesVoyage.dateAller" formControlName="dateAller" readonly>
-    <input type="text" [(ngModel)]="datesVoyage.dateRetour" formControlName="dateRetour" readonly>
-    <input type="text" [(ngModel)]="datesVoyage.prixHT" formControlName="prixHT" readonly>
-    <input type="text" [(ngModel)]="datesVoyage.nbrePlaces" formControlName="nbrePlaces" readonly>
-    <input type="text" [(ngModel)]="datesVoyage.id" formControlName="id" readonly>
+    <input type="text" [(ngModel)]="datesVoyage.dateAller" formControlName="dateAller" hidden>
+    <input type="text" [(ngModel)]="datesVoyage.dateRetour" formControlName="dateRetour" hidden>
+    <input type="text" [(ngModel)]="datesVoyage.prixHT" formControlName="prixHT" hidden>
+    <input type="text" [(ngModel)]="datesVoyage.nbrePlaces" formControlName="nbrePlaces" hidden>
+    <input type="text" [(ngModel)]="datesVoyage.id" formControlName="id" hidden>
   </div>
+
   <div formGroupName="client">
-    <input type="text" [(ngModel)]="userDisplay" formControlName="nom" readonly>
+    <input type="text" [(ngModel)]="userDisplay" formControlName="nom" hidden>
   </div>
+
+
   <div formArrayName="voyageurs">
     <div *ngFor="let control of voyageurs.controls; index as i">
       <div [formGroupName]="i">
-        <select name="civilite" formControlName="civilite">
-          <option>M</option>
-          <option>Mme</option>
-          <option>Mlle</option>
-        </select>
-        <input type="text" formControlName="nom">
-        <input type="text" formControlName="prenom">
+        <div class="form-row">
+          <div class="col-2">
+            <label class="mr-sm-2 sr-only" for="civiliteSelect">Civilite</label>
+            <select class="custom-select mr-sm-2" formControlName="civilite" id="civiliteSelect">
+              <option value="1">M</option>
+              <option value="2">Mme</option>
+              <option value="3">Mlle</option>
+            </select>
+          </div>
+          <div class="col-3">
+            <input type="text" class="form-control" placeholder="Nom" formControlName="nom">
+          </div>
+          <div class="col-3">
+            <input type="text" class="form-control" placeholder="Prenom" formControlName="prenom">
+          </div>
+          <div>
+            <button type="button" (click)="deleteVoyageur(i)">X</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <button type="button" (click)="addVoyageur()">Ajouter un voyageur</button>
+  <button type="button" [disabled]="compteur>9" (click)="addVoyageur()">Ajouter un voyageur</button>
   <button type="submit">Créer le voyage</button>
 </form>
-<div>
-  {{destination.region}}
-  {{datesVoyage?.id}}
-</div>

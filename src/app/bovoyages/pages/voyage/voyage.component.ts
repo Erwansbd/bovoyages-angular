@@ -17,6 +17,7 @@ import {error} from 'util';
 export class VoyageComponent implements OnInit {
   private url = 'http://localhost:7071/';
   userDisplay = '';
+  public compteur = 1;
   @Input() destination: Destination;
   @Input() datesVoyage: DatesVoyage;
   form: FormGroup;
@@ -68,7 +69,17 @@ export class VoyageComponent implements OnInit {
         'prenom': new FormControl('', [Validators.required]),
         'civilite': new FormControl('', [Validators.required])
       })
-    );
+   );
+    this.increment();
+    console.log(this.compteur);
+  }
+
+  deleteVoyageur(i: number) {
+    this.voyageurs.removeAt(i);
+  }
+
+  increment() {
+    this.compteur += 1;
   }
 
   get voyageurs(): FormArray {
