@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Client} from '../../shared/client';
 import {ClientService} from '../../services/client.service';
 import {AuthService} from '../../services/auth.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -14,18 +15,20 @@ export class NavbarComponent implements OnInit {
   title = 'BoVoyages';
   isAuth = false;
   date: Date;
+  // dollar sign signifie que le parametre est un observable
+  loginStatus$: Observable<boolean>;
+  username$: Observable<string>;
 
   constructor(private clientService: ClientService, private authService: AuthService) { }
 
   ngOnInit() {
     this.date = new Date();
-    this.clientService.getClient().subscribe((client) => { this.client = client });
-    this.isAuth = this.authService.isLoggedIn();
+    this.loginStatus$ = this.authService.currentLoginStatus;
+    this.username$ = this.authService.currentUsername;
   }
 
   onLogout() {
     this.authService.logout();
-    this.isAuth = this.authService.isLoggedIn();
   }
 
 }

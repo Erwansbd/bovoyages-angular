@@ -1,15 +1,17 @@
 <app-navbar></app-navbar>
 <form (ngSubmit)="onSubmit()" [formGroup]="form">
-  <input type="text" value="{{destination?.region}}" formControlName="region" readonly>
-  <textarea formControlName="descriptif" readonly>
-    {{destination?.description}}
+  <input type="text" [(ngModel)]="destination.region" formControlName="region" readonly>
+  <textarea [(ngModel)]="destination.description" formControlName="descriptif" readonly>
   </textarea>
-  <div formArrayName="client">
-    <div *ngFor="let control of client.controls; index as i">
-      <div [formGroupName]="i">
-        <input type="text" readonly value="{{user.nom}}" formControlName="nom">
-      </div>
-    </div>
+  <div formGroupName="datesVoyage">
+    <input type="text" [(ngModel)]="datesVoyage.dateAller" formControlName="dateAller" readonly>
+    <input type="text" [(ngModel)]="datesVoyage.dateRetour" formControlName="dateRetour" readonly>
+    <input type="text" [(ngModel)]="datesVoyage.prixHT" formControlName="prixHT" readonly>
+    <input type="text" [(ngModel)]="datesVoyage.nbrePlaces" formControlName="nbrePlaces" readonly>
+    <input type="text" [(ngModel)]="datesVoyage.id" formControlName="id" readonly>
+  </div>
+  <div formGroupName="client">
+    <input type="text" [(ngModel)]="user.nom" formControlName="nom" readonly>
   </div>
   <div formArrayName="voyageurs">
     <div *ngFor="let control of voyageurs.controls; index as i">

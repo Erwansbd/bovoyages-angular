@@ -7,11 +7,12 @@ import {Observable, of} from 'rxjs';
 })
 export class ClientService {
 
-  private client = new Client('Erwan');
+  client: Client;
 
   constructor() { }
 
   getClient(): Observable<Client> {
+    console.log(this.client);
     return of(this.client);
   }
   setClient(client) {

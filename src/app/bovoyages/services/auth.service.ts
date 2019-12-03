@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ClientService} from './client.service';
+import {BehaviorSubject} from 'rxjs';
+import {Client} from '../shared/client';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +12,11 @@ export class AuthService {
 
   private isAuth = false;
   private url = 'http://localhost:7071/';
+  redirectUrl: string;
+  private loginStatus = new BehaviorSubject<boolean>(this.isLoggedIn());
+  private username = new BehaviorSubject<string>(localStorage.getItem('username'));
 
   constructor(private router: Router, private httpClient: HttpClient, private clientService: ClientService) {
-  }
-
-  isLoggedIn() {
-    this.isAuth = JSON.parse(localStorage.getItem('auth'));
-    return this.isAuth;
   }
 
   login(client, cb) {
@@ -27,10 +27,12 @@ export class AuthService {
     this.httpClient.post(this.url + 'connexion', params).subscribe(
       (status) => {
         if (status) {
-          this.isAuth = true;
+          this.loginStatus.next(true);
+          localStorage.setItem('loginStatus', '1');
+          localStorage.setItem('username', client.nom);
+          localStorage.setItem('auth', 'true');
           this.router.navigate(['/destination']);
           this.clientService.setClient(client);
-          localStorage.setItem('auth', 'true');
         } else {
           cb('Identifiants incorrects');
         }
@@ -40,11 +42,11 @@ export class AuthService {
   }
 
   logout() {
-    this.isAuth = false;
+    this.loginStatus.next(false);
+    localStorage.setItem('loginStatus', '0');
+    localStorage.removeItem('username');
     localStorage.removeItem('auth');
-    this.router.navigateByUrl('/RefreshComponent', {skipLocationChange: true});
-    this.router.navigate(['/home']);
-
+    this.router.navigate(['/destination']);
   }
 
   register(client) {
@@ -59,5 +61,22 @@ export class AuthService {
         }
       },
     );
+  }
+
+  private checkLoginStatus(): BehaviorSubject<boolean> {
+    return this.currentLoginStatus;
+  }
+
+    isLoggedIn() {
+    this.isAuth = JSON.parse(localStorage.getItem('auth'));
+    return this.isAuth;
+  }
+
+  get currentLoginStatus() {
+    return this.loginStatus;
+  }
+
+  get currentUsername() {
+    return this.username.asObservable();
   }
 }

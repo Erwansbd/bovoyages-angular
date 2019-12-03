@@ -14,6 +14,7 @@ import {RegisterComponent} from './pages/register/register.component';
 import {registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { VoyageComponent } from './pages/voyage/voyage.component';
+import { MesvoyagesComponent } from './pages/mesvoyages/mesvoyages.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -27,7 +28,8 @@ registerLocaleData(localeFr, 'fr');
     LoginComponent,
     NavbarComponent,
     RegisterComponent,
-    VoyageComponent
+    VoyageComponent,
+    MesvoyagesComponent
   ],
   imports: [
     CommonModule,

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {ClientService} from '../../services/client.service';
 import {NgForm} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +13,8 @@ export class LoginComponent implements OnInit {
 
   isAuth: boolean;
   error: string;
-
-  constructor(private authService: AuthService, private clientService: ClientService) {
+  returnUrl: string;
+  constructor(private authService: AuthService, private clientService: ClientService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Destination} from './destination';
 import {DatesVoyage} from './dates-voyage';
@@ -35,5 +35,9 @@ export class DestinationsService {
 
   getDatesVoyageById(id): Observable<DatesVoyage> {
     return this.httpClient.get<DatesVoyage>(this.url + 'date/' + id);
+  }
+
+  submitVoyage(data): Observable<any> {
+    return this.httpClient.post(this.url + 'voyage/new', data);
   }
 }

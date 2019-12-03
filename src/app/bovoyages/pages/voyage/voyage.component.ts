@@ -1,11 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DestinationsService} from '../../shared/destinations.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {Client} from '../../shared/client';
 import {ClientService} from '../../services/client.service';
 import {Destination} from '../../shared/destination';
 import {DatesVoyage} from '../../shared/dates-voyage';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {error} from 'util';
 
 @Component({
   selector: 'app-voyage',
@@ -13,23 +15,32 @@ import {DatesVoyage} from '../../shared/dates-voyage';
   styleUrls: ['./voyage.component.css']
 })
 export class VoyageComponent implements OnInit {
+  private url = 'http://localhost:7071/';
   @Input() user: Client;
   @Input() destination: Destination;
   @Input() datesVoyage: DatesVoyage;
   form: FormGroup;
 
-  constructor(private destinationService: DestinationsService, private router: Router, private clientService: ClientService, private activatedRoute: ActivatedRoute) {
+  constructor(private destinationService: DestinationsService, private router: Router, private clientService: ClientService, private activatedRoute: ActivatedRoute, private httpClient: HttpClient) {
   }
 
   ngOnInit() {
+    this.clientService.getClient().subscribe(
+      client => this.user = client
+    );
     this.form = new FormGroup({
-      region: new FormControl('',),
+      region: new FormControl(''),
       descriptif: new FormControl('', [Validators.required]),
-      client: new FormArray([
-        new FormGroup( {
-          nom: new FormControl('user.nom', [Validators.required])
-        })
-      ]),
+      datesVoyage: new FormGroup({
+        id: new FormControl(''),
+        dateAller: new FormControl(''),
+        dateRetour: new FormControl(''),
+        prixHT: new FormControl(''),
+        nbrePlaces: new FormControl('')
+      }),
+      client: new FormGroup({
+        nom: new FormControl('', [Validators.required])
+      }),
       voyageurs: new FormArray([
         new FormGroup({
           nom: new FormControl('', [Validators.required]),
@@ -38,9 +49,6 @@ export class VoyageComponent implements OnInit {
         })
       ])
     });
-    this.clientService.getClient().subscribe(
-      client => this.user = client
-    );
     this.activatedRoute.paramMap.subscribe(
       (map) => {
         const id = +map.get('id');
@@ -50,6 +58,7 @@ export class VoyageComponent implements OnInit {
         this.destinationService.getDatesVoyageById(id).subscribe(
           datesVoyage => this.datesVoyage = datesVoyage
         );
+        console.log(this.client);
       }
     );
   }
@@ -72,7 +81,18 @@ export class VoyageComponent implements OnInit {
     return this.form.get('client') as FormArray;
   }
 
+  get datesVoyageInfo(): FormArray {
+    return this.form.get('datesVoyage') as FormArray;
+  }
+
   onSubmit() {
-    console.log(this.form.getRawValue());
+    this.destinationService.submitVoyage(this.form.value).subscribe(
+      (data) => {
+        console.log('Formulaire envoyé');
+      },
+      (err: HttpErrorResponse) => {
+        console.log(err);
+      }
+    );
   }
 }
