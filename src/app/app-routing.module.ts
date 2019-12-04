@@ -8,6 +8,7 @@ import {HomeComponent} from './bovoyages/pages/home/home.component';
 import {VoyageComponent} from './bovoyages/pages/voyage/voyage.component';
 import {RegisterComponent} from './bovoyages/pages/register/register.component';
 import {MesvoyagesComponent} from './bovoyages/pages/mesvoyages/mesvoyages.component';
+import {AuthGuardService} from './bovoyages/services/auth-guard.service';
 
 
 const routes: Routes = [
@@ -22,7 +23,7 @@ const routes: Routes = [
     path: 'destination-details/:id', component: DestinationDetailsComponent
   },
   {
-    path: 'voyage/:id', component: VoyageComponent
+    path: 'voyage/:id', component: VoyageComponent, canActivate: [AuthGuardService]
   },
   {
     path: 'login', component: LoginComponent
@@ -31,7 +32,7 @@ const routes: Routes = [
     path: 'register', component: RegisterComponent
   },
   {
-    path: 'mesvoyages/:nom', component: MesvoyagesComponent
+    path: 'mesvoyages/:nom', component: MesvoyagesComponent, canActivate: [AuthGuardService]
   },
   {
     path: '**', redirectTo: 'destination'

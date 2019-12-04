@@ -1,2 +1,6 @@
 <app-navbar></app-navbar>
-<p>mesvoyages works!</p>
+<div class="container">
+  <div *ngFor="let voyage of voyages">
+    {{voyage.region}}
+  </div>
+</div>

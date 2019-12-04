@@ -15,6 +15,14 @@ export class MesvoyagesComponent implements OnInit {
   constructor(private destinationService: DestinationsService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.activatedRoute.paramMap.subscribe(
+      (map) => {
+        const name = map.get('nom');
+        this.destinationService.getVoyagesByClient(name).subscribe(
+          voyages => this.voyages = voyages
+        );
+      }
+    );
 
   }
 

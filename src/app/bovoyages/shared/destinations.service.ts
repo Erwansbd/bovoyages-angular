@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Destination} from './destination';
 import {DatesVoyage} from './dates-voyage';
 import {Image} from './image';
+import {Voyage} from './voyage';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,9 @@ export class DestinationsService {
 
   getImages(id: number): Observable<any> {
     return this.httpClient.get<Image[]>(this.url + 'destinationimage/' + id);
+  }
+
+  getVoyagesByClient(name: string): Observable<Voyage[]> {
+    return this.httpClient.get<Voyage[]>(this.url + 'voyageclient/' + name);
   }
 }
