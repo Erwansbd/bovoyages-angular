@@ -1,6 +1,46 @@
 <app-navbar></app-navbar>
-<div class="container">
-  <div *ngFor="let voyage of voyages">
-    {{voyage.region}}
-  </div>
+<div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col" class="border-0 bg-light">
+        <div class="p-2 px-3 text-uppercase">Liste de vos voyages</div>
+      </th>
+    </tr>
+    </thead>
+    <div class="d-flex justify-content-center">
+    <tbody class="text-center">
+    <div *ngFor="let voyage of voyages">
+      <tr>
+        <th scope="row" class="border-0">
+          <div class="p-2">
+            <div class="ml-3 d-inline-block align-middle">
+              <h5 class="mb-0" href="#" class="text-dark d-inline-block align-middle">Region</h5><span
+              class="text-muted font-weight-normal font-italic d-block">{{voyage.region}}</span>
+            </div>
+          </div>
+        </th>
+        <th scope="row" class="border-0">
+          <div class="p-2">
+            <div class="ml-3 d-inline-block align-middle">
+              <h5 class="mb-0" href="#" class="text-dark d-inline-block align-middle">Date aller</h5><span
+              class="text-muted font-weight-normal font-italic d-block">{{voyage.datesVoyage.dateAller | date: 'EEEE dd LLLL yyy'}}</span>
+            </div>
+          </div>
+        </th>
+        <th scope="row" class="border-0">
+          <div class="p-2">
+            <div class="ml-3 d-inline-block align-middle">
+              <h5 class="mb-0" class="text-dark d-inline-block align-middle">Date aller</h5><span
+              class="text-muted font-weight-normal font-italic d-block">{{voyage.datesVoyage.dateAller | date: 'EEEE dd LLLL yyy'}}</span>
+            </div>
+          </div>
+        </th>
+      </tr>
+    </div>
+    </tbody>
+    </div>
+  </table>
 </div>
+
+
