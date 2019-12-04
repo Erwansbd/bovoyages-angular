@@ -1,47 +1,56 @@
 <div class="container-fluid">
   <div class="row no-gutter">
-    <!-- The image half -->
-    <div class="col-md-6 d-none d-md-flex"></div>
-    <!-- Login content-->
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-10 col-xl-7 mx-auto">
-          <h3 class="display-4">Inscription</h3>
-          <p class="text-muted mb-4">Merci de vous inscrire !</p>
-          <form #f="ngForm" (ngSubmit)="register(f)">
-            <div class="form-group mb-3">
-              <input type="text" name="nom" placeholder="Username" #nom="ngModel"
-                     class="form-control rounded-pill border-0 shadow-sm px-4" ngModel required minlength="3">
-              <div *ngIf="nom.invalid && (nom.touched || nom.dirty)">
-                <p *ngIf="nom.errors.required" class="font-weight-bold text-center">
-                  Merci de renseigner un nom d'utilisateur.
+    <div class="col-md-6 bg-light">
+      <div class="login d-flex align-items-center py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-xl-7 mx-auto">
+              <h3 class="display-4">Inscription</h3>
+              <p class="text-muted mb-4">Merci de vous inscrire !</p>
+              <form #f="ngForm" (ngSubmit)="register(f)">
+                <div class="form-group mb-3">
+                  <input type="text" name="nom" placeholder="Username" #nom="ngModel"
+                         class="form-control rounded-pill border-0 shadow-sm px-4" ngModel required minlength="5">
+                  <div *ngIf="nom.invalid && (nom.touched || nom.dirty)">
+                    <p *ngIf="nom.errors.required" class="font-weight-bold text-center">
+                      Votre nom d'utilisateur ne peut pas être vide.
+                    </p>
+                    <p *ngIf="nom.errors.minlength" class="font-weight-bold text-center">
+                      Votre nom d'utilisateur doit contenir au minimum cinq lettres.
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <input type="password" placeholder="Password" name="password" #password="ngModel"
+                         class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" required ngModel pattern="(?=.*\d)(?=.*[a-z]).{8,}">
+                  <div *ngIf="password.invalid && (password.touched || password.dirty)">
+                    <p *ngIf="password.errors.pattern" class="font-weight-bold text-center">
+                      Votre password doit contenir au minimum huit caracteres et un chiffre.
+                    </p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">
+                    Sign up
+                  </button>
+                </div>
+                <p *ngIf="error">
+                  {{error}}
                 </p>
-                <p *ngIf="nom.errors.minlength" class="font-weight-bold text-center">
-                  Votre nom doit contenir plus de trois caracteres.
-                </p>
-              </div>
+                <div class="text-center d-flex justify-content-between mt-4"><p>Vous avez déja un compte? c'est par ici.
+                  <a
+                    [routerLink]='["/login"]' class="font-italic text-muted">
+                    <u>Login</u></a></p></div>
+                <div class="text-center d-flex justify-content-between"><p>Vous voulez revenir à l'accueil? c'est par ici.
+                  <a
+                    [routerLink]='["/destination"]' class="font-italic text-muted">
+                    <u>Accueil</u></a></p></div>
+              </form>
             </div>
-            <div class="form-group mb-3">
-              <input type="text" placeholder="Password" name="password"
-                     class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" required ngModel>
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">
-                Sign up
-              </button>
-            </div>
-            <div class="text-center d-flex justify-content-between mt-4"><p>Deja utilisateur? c'est par ici. <a
-              [routerLink]='["/login"]' class="font-italic text-muted">
-              <u>Login</u></a></p></div>
-          </form>
+          </div>
         </div>
       </div>
-    </div><!-- End -->
-    <!-- The content half -->
-    <div class="col-md-6 d-none d-md-flex bg-image">
-
-    </div><!-- End -->
-
+    </div>
+    <div class="col-md-6 d-none d-md-flex bg-image"></div>
   </div>
 </div>
-

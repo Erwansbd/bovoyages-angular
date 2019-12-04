@@ -4,7 +4,6 @@ import {DestinationListeComponent} from './bovoyages/pages/destination-liste/des
 import {CommonModule} from '@angular/common';
 import {DestinationDetailsComponent} from './bovoyages/components/destination-details/destination-details.component';
 import {LoginComponent} from './bovoyages/pages/login/login.component';
-import {HomeComponent} from './bovoyages/pages/home/home.component';
 import {VoyageComponent} from './bovoyages/pages/voyage/voyage.component';
 import {RegisterComponent} from './bovoyages/pages/register/register.component';
 import {MesvoyagesComponent} from './bovoyages/pages/mesvoyages/mesvoyages.component';
@@ -12,10 +11,6 @@ import {AuthGuardService} from './bovoyages/services/auth-guard.service';
 
 
 const routes: Routes = [
-
-  {
-    path: 'home', component: HomeComponent
-  },
   {
     path: 'destination', component: DestinationListeComponent
   },

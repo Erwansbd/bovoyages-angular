@@ -9,13 +9,11 @@ import {DestinationsService} from './bovoyages/shared/destinations.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BrowserModule} from '@angular/platform-browser';
 import {ClientService} from './bovoyages/services/client.service';
-import {HomeComponent} from './bovoyages/pages/home/home.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

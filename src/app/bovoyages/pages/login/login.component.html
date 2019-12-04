@@ -27,9 +27,9 @@
                   </div>
                 </div>
                 <div class="form-group mb-3">
-                  <input type="text" placeholder="Password" name="password"
-                         class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" required ngModel>
-                </div>
+                  <input type="password" placeholder="Password" name="password"
+                         class="form-control rounded-pill border-0 shadow-sm px-4 text-primary" ngModel required>
+                  </div>
                 <div class="form-group">
                   <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">
                     Sign in
@@ -41,6 +41,10 @@
                 <div class="text-center d-flex justify-content-between mt-4"><p>Pas de compte? c'est par ici. <a
                   [routerLink]='["/register"]' class="font-italic text-muted">
                   <u>Register</u></a></p></div>
+                <div class="text-center d-flex justify-content-between"><p>Vous voulez revenir à l'accueil? c'est par ici.
+                  <a
+                    [routerLink]='["/destination"]' class="font-italic text-muted">
+                    <u>Accueil</u></a></p></div>
               </form>
             </div>
           </div>
