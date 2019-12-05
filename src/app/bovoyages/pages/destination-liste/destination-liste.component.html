@@ -1,10 +1,10 @@
 <app-navbar></app-navbar>
 <div class="container">
   <div class="row">
-    <div *ngFor="let destination of destinations; let i = index" class="col-lg-6">
-      <a [routerLink]="['/destination-details', destination.id]" class="col-lg-6">
+    <div *ngFor="let destination of destinations; let i = index" class="col-lg-4">
+      <a [routerLink]="['/destination-details', destination.id]" class="col-lg-4">
         <figure class="rounded p-3 bg-white shadow-sm">
-          <img *ngIf="destination.imageUrl" [src]="'http://127.0.0.1:8080/' + destination.imageUrl" alt="" class="w-100 card-img-top">
+          <img *ngIf="destination.imageUrl" [src]="'http://127.0.0.1:8080/' + destination.imageUrl" alt="" class="card-img-top">
           <img *ngIf="!destination.imageUrl" src="https://i.imgur.com/whA78A9.jpg">
           <figcaption class="p-4 card-img-bottom">
             <h2 class="h5 font-weight-bold mb-2 font-italic">{{destination.region}}</h2>
