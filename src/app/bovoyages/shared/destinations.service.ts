@@ -50,4 +50,8 @@ export class DestinationsService {
   getVoyagesByClient(name: string): Observable<Voyage[]> {
     return this.httpClient.get<Voyage[]>(this.url + 'voyageclient/' + name);
   }
+
+  mail(name) {
+    return this.httpClient.post(this.url + 'caddy/confirm/', name);
+  }
 }
