@@ -98,6 +98,7 @@ export class VoyageComponent implements OnInit {
     this.destinationService.submitVoyage(this.form.value).subscribe(
       (data) => {
         console.log('Formulaire envoyé');
+        this.router.navigate(['/destination']);
       },
       (err: HttpErrorResponse) => {
         console.log(err);
